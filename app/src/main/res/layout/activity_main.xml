@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/datoPrueba"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Perfiles"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:background="#4541F5"
+        android:textColor="#ECECEC"
+        android:padding="10dp"
+        android:layout_marginBottom="10dp"
+        />
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchViewPerfiles"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewPerfiles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+
+</LinearLayout>
