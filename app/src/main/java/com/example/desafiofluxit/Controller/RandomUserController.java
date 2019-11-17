@@ -7,9 +7,9 @@ import com.example.desafiofluxit.View.ResultListener;
 
 public class RandomUserController {
 
-    RandomUserDao randomUserDao;
-    Integer pageSize = 20;
-    String seed = " ";
+    private RandomUserDao randomUserDao;
+    private Integer pageSize = 20;
+    private String seed = "";
 
     //Instancia el RandomUserDao en el constructor, - al instanciarse este Controller
     public RandomUserController(){
