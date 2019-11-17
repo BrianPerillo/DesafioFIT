@@ -1,5 +1,6 @@
 package com.example.desafiofluxit;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -30,6 +31,10 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
     private RecyclerView recyclerViewPerfiles;
     private PerfilAdapter perfilAdapter;
     private TextView datoPrueba;
+    private LinearLayoutManager linearLayoutManagerPerfiles;
+    private RandomUserController randomUserController;
+    private List<Perfil> perfilList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,17 +45,50 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
 
         recyclerViewPerfiles = findViewById(R.id.recyclerViewPerfiles);
 
-        RecyclerView.LayoutManager layoutManagerPerfiles = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-
-        recyclerViewPerfiles.setLayoutManager(layoutManagerPerfiles);
+        linearLayoutManagerPerfiles = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
 
+        recyclerViewPerfiles.setLayoutManager(linearLayoutManagerPerfiles);
 
-        RandomUserController randomUserController = new RandomUserController();
+        randomUserController = new RandomUserController();
 
-        final List<Perfil> perfilList = new ArrayList<>();
+        perfilList = new ArrayList<>();
 
-          randomUserController.getPerfiles(new ResultListener<Post>(){
+
+
+        getPerfiles();
+
+
+
+        perfilAdapter = new PerfilAdapter(perfilList, this);
+
+        recyclerViewPerfiles.setAdapter(perfilAdapter);
+
+        recyclerViewPerfiles.setHasFixedSize(true);
+
+        recyclerViewPerfiles.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                Integer items = linearLayoutManagerPerfiles.getItemCount();
+                Integer posicionActual = linearLayoutManagerPerfiles.findLastVisibleItemPosition();
+
+                if (posicionActual.equals(items - 4)){
+
+                    getPerfiles();
+
+                }
+
+            }
+        });
+
+    }
+
+
+    public void getPerfiles(){
+
+        randomUserController.getPerfiles(new ResultListener<Post>(){
             @Override
             public void onFinish(Post result) {
 
@@ -64,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
                 }
 
                 if (result!=null){
-                Toast.makeText(MainActivity.this, "Carga de Perfiles Exitosa", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "Carga de Perfiles Exitosa", Toast.LENGTH_LONG).show();
                 }
 
                 perfilAdapter.actualizarLista(perfilList);
@@ -72,15 +110,6 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
             }
 
         });
-
-
-
-        perfilAdapter = new PerfilAdapter(perfilList, this);
-
-        recyclerViewPerfiles.setAdapter(perfilAdapter);
-
-        recyclerViewPerfiles.setHasFixedSize(true);
-
 
     }
 

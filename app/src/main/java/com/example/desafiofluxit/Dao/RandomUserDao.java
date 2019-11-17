@@ -21,7 +21,7 @@ public class RandomUserDao {
     private RandomUserService randomUserService;
 
     public RandomUserDao(){
-        baseUrl = "https://randomuser.me/api/";
+        baseUrl = "https://randomuser.me/";
         retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -29,11 +29,11 @@ public class RandomUserDao {
         randomUserService = retrofit.create(RandomUserService.class);
     }
 
-    public void getPerfiles(final ResultListener<Post> escuchadorDelControlador){
+    public void getPerfiles(Integer pageSize, String seed, final ResultListener<Post> escuchadorDelControlador){
 
         //Al hacerle .getPerfiles le digo ejecuta el método getPerfiles del Service
 
-        randomUserService.getPerfiles().enqueue(new Callback<Post>() {
+        randomUserService.getPerfiles(pageSize, seed).enqueue(new Callback<Post>() {
             @Override
             public void onResponse(Call<Post> call, Response<Post> response) {
                 Post perfil = response.body();

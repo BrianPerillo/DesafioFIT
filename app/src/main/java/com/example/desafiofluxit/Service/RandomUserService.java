@@ -6,10 +6,12 @@ import com.example.desafiofluxit.Model.Result;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface RandomUserService {
 
-    @GET("?results=100")
-    Call<Post> getPerfiles();
+    @GET("api/")
+    Call<Post> getPerfiles(@Query("results") Integer pageSize, @Query("seed") String seed);
 
 }
