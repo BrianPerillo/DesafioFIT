@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +36,8 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
     private LinearLayoutManager linearLayoutManagerPerfiles;
     private RandomUserController randomUserController;
     private List<Perfil> perfilList;
+    private SwipeRefreshLayout swipeRecyclerPerfiles;
+    private Boolean booleano = false;
 
 
     @Override
@@ -45,8 +49,11 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
 
         recyclerViewPerfiles = findViewById(R.id.recyclerViewPerfiles);
 
-        linearLayoutManagerPerfiles = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        swipeRecyclerPerfiles = findViewById(R.id.swipeRecyclerPerfiles);
 
+    //------------------------------
+
+        linearLayoutManagerPerfiles = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
         recyclerViewPerfiles.setLayoutManager(linearLayoutManagerPerfiles);
 
@@ -55,9 +62,7 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
         perfilList = new ArrayList<>();
 
 
-
         getPerfiles();
-
 
 
         perfilAdapter = new PerfilAdapter(perfilList, this);
@@ -71,6 +76,8 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
+                booleano = false;
+
                 Integer items = linearLayoutManagerPerfiles.getItemCount();
                 Integer posicionActual = linearLayoutManagerPerfiles.findLastVisibleItemPosition();
 
@@ -83,8 +90,24 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
             }
         });
 
+        swipeRecyclerPerfiles.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                perfilList.clear();
+                booleano = true;
+                getPerfiles();
+                
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        swipeRecyclerPerfiles.setRefreshing(false);
+                    }
+                }, 1000);
+            }
+        });
     }
 
+    //--------------Fin onCreate--------------------
 
     public void getPerfiles(){
 
@@ -101,8 +124,12 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
 
                 }
 
-                if (result!=null){
+                if (result!=null && booleano==false){
                     Toast.makeText(MainActivity.this, "Carga de Perfiles Exitosa", Toast.LENGTH_LONG).show();
+                }
+
+                else if (result!=null && booleano==true){
+                    Toast.makeText(MainActivity.this, "Actualización Exitosa", Toast.LENGTH_LONG).show();
                 }
 
                 perfilAdapter.actualizarLista(perfilList);
@@ -112,6 +139,7 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
         });
 
     }
+
 
 
     @Override

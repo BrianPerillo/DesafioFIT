@@ -2,6 +2,8 @@ package com.example.desafiofluxit.Dao;
 
 import android.widget.Toast;
 
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.example.desafiofluxit.Model.Perfil;
 import com.example.desafiofluxit.Model.Post;
 import com.example.desafiofluxit.Model.Result;
@@ -33,9 +35,11 @@ public class RandomUserDao {
 
         //Al hacerle .getPerfiles le digo ejecuta el método getPerfiles del Service
 
+
         randomUserService.getPerfiles(pageSize, seed).enqueue(new Callback<Post>() {
             @Override
             public void onResponse(Call<Post> call, Response<Post> response) {
+
                 Post perfil = response.body();
                 escuchadorDelControlador.onFinish(perfil);
 
@@ -43,6 +47,7 @@ public class RandomUserDao {
 
             @Override
             public void onFailure(Call<Post> call, Throwable t) {
+
                 t.printStackTrace();
             }
         });

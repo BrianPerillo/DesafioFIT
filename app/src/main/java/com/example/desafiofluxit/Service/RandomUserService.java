@@ -12,6 +12,6 @@ import retrofit2.http.Query;
 public interface RandomUserService {
 
     @GET("api/")
-    Call<Post> getPerfiles(@Query("results") Integer pageSize, @Query("seed") String seed);
+    Call<Post> getPerfiles(@Query("results") Integer pageSize, @Query("seed") String seed);//Agregar Query para cambio de pagina
 
 }
