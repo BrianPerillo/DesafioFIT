@@ -33,9 +33,6 @@ public class RandomUserDao {
 
     public void getPerfiles(Integer pageSize, String seed, Integer page, final ResultListener<Post> escuchadorDelControlador){
 
-        //Al hacerle .getPerfiles le digo ejecuta el método getPerfiles del Service
-
-
         randomUserService.getPerfiles(pageSize, seed, page).enqueue(new Callback<Post>() {
             @Override
             public void onResponse(Call<Post> call, Response<Post> response) {

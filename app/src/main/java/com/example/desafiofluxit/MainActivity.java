@@ -107,12 +107,6 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
 
                 getPerfiles();
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        swipeRecyclerPerfiles.setRefreshing(false);
-                    }
-                }, 1000);
 
             }
         });
@@ -131,7 +125,6 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
         else{
             progressBar.setVisibility(View.VISIBLE);
         }
-
 
         randomUserController.getPerfiles(page, new ResultListener<Post>(){
             @Override
@@ -157,6 +150,7 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
                 perfilAdapter.actualizarLista(perfilList);
 
                 progressBar.setVisibility(View.GONE);
+                swipeRecyclerPerfiles.setRefreshing(false);
             }
 
         });
