@@ -10,6 +10,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
     private SwipeRefreshLayout swipeRecyclerPerfiles;
     private Boolean booleano = false;
     private Integer page = 1;
+    private ProgressBar progressBar;
 
 
     @Override
@@ -51,6 +54,8 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
         recyclerViewPerfiles = findViewById(R.id.recyclerViewPerfiles);
 
         swipeRecyclerPerfiles = findViewById(R.id.swipeRecyclerPerfiles);
+
+        progressBar = findViewById(R.id.progressBar);
 
     //------------------------------
 
@@ -108,13 +113,25 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
                         swipeRecyclerPerfiles.setRefreshing(false);
                     }
                 }, 1000);
+
             }
         });
     }
 
     //--------------Fin onCreate--------------------
 
+
+
     public void getPerfiles(){
+
+        if(booleano==true){
+            progressBar.setVisibility(View.GONE);
+        }
+
+        else{
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
 
         randomUserController.getPerfiles(page, new ResultListener<Post>(){
             @Override
@@ -139,6 +156,7 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
 
                 perfilAdapter.actualizarLista(perfilList);
 
+                progressBar.setVisibility(View.GONE);
             }
 
         });

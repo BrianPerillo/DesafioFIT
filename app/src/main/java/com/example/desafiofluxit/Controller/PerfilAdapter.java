@@ -30,26 +30,26 @@ public class PerfilAdapter extends RecyclerView.Adapter{
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        // Traigo inflador
+
         LayoutInflater inflador = LayoutInflater.from(parent.getContext());
 
-        // Inflo vista
+
         View view = inflador.inflate(R.layout.celdas_perfil, parent, false);
 
-        // Instancio View Holder
+
         PerfilViewHolder perfilViewHolder = new PerfilViewHolder(view);
 
-        // Retorno Vista
+
         return perfilViewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        //Guardo el holder que recibe como parámetro, y lo casteo
+
         PerfilViewHolder perfilViewHolder = (PerfilViewHolder) holder;
-        //Guardo el chat/instanacia de Chat, que se encuentra en la Lista en la posición recibida (position).
+
         Perfil perfil = perfilList.get(position);
-        //Se hace un bind al chatViewHolder y se le pasa el chat
+
         perfilViewHolder.bind(perfil);
     }
 
@@ -58,7 +58,7 @@ public class PerfilAdapter extends RecyclerView.Adapter{
         return perfilList.size();
     }
 
-    //Método que actualiza la lista recibida.
+
     public void actualizarLista(List<Perfil> perfilList){
         this.perfilList = perfilList;
         notifyDataSetChanged();
@@ -90,7 +90,7 @@ public class PerfilAdapter extends RecyclerView.Adapter{
         }
 
         public void bind (Perfil unperfil){
-            //PASAR IMAGEN CON GLIDE => imageViewCeldasPerfilThumbnail.setDra(unchat.getNombre());
+
 
             textViewCeldasPerfilNombre.setText(unperfil.getUsername());
 
