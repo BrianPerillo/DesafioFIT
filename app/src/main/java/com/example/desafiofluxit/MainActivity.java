@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
     private List<Perfil> perfilList;
     private SwipeRefreshLayout swipeRecyclerPerfiles;
     private Boolean booleano = false;
+    private Integer page = 1;
 
 
     @Override
@@ -83,6 +84,8 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
 
                 if (posicionActual.equals(items - 4)){
 
+                    page++;
+
                     getPerfiles();
 
                 }
@@ -95,8 +98,10 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
             public void onRefresh() {
                 perfilList.clear();
                 booleano = true;
+                page = 1;
+
                 getPerfiles();
-                
+
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -111,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
 
     public void getPerfiles(){
 
-        randomUserController.getPerfiles(new ResultListener<Post>(){
+        randomUserController.getPerfiles(page, new ResultListener<Post>(){
             @Override
             public void onFinish(Post result) {
 

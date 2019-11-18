@@ -11,14 +11,15 @@ public class RandomUserController {
     private Integer pageSize = 20;
     private String seed = "";
 
+
     //Instancia el RandomUserDao en el constructor, - al instanciarse este Controller
     public RandomUserController(){
         randomUserDao = new RandomUserDao();
     }
 
     // Recibe escuchador de la View, le pide al Dao que ejecute su método getPerfiles y crea un escuchador.
-    public void getPerfiles(final ResultListener escuchadorDeLaView){
-        randomUserDao.getPerfiles(pageSize, seed, new ResultListener<Post>() {
+    public void getPerfiles(Integer page, final ResultListener escuchadorDeLaView){
+        randomUserDao.getPerfiles(pageSize, seed, page, new ResultListener<Post>() {
             @Override
             public void onFinish(Post result) {
                 escuchadorDeLaView.onFinish(result);
