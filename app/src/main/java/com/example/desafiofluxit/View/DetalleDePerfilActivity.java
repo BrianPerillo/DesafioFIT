@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.content.PeriodicSync;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -16,6 +18,7 @@ import com.example.desafiofluxit.Model.Perfil;
 import com.example.desafiofluxit.R;
 import com.google.android.gms.dynamic.SupportFragmentWrapper;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.Serializable;
 
@@ -29,6 +32,7 @@ public class DetalleDePerfilActivity extends AppCompatActivity {
     private MapsFragment mapsFragment;
     private Double latitudeD;
     private Double longitudeD;
+    LinearLayout layout;
 
     public static final String PERFIL = "perfil";
 
@@ -48,6 +52,10 @@ public class DetalleDePerfilActivity extends AppCompatActivity {
         textViewLastEdad = findViewById(R.id.textViewLastEdad);;
 
         textViewUserEmail = findViewById(R.id.textViewUserEmail);
+
+        layout = findViewById(R.id.detalleDePerfilActivity);
+
+        //------------------------------
 
         Intent intentRecibido = getIntent();
 
@@ -86,6 +94,8 @@ public class DetalleDePerfilActivity extends AppCompatActivity {
         textViewLastName.setText("Apellido: " + perfilRecibido.getLastName());
         textViewLastEdad.setText("Edad: " + perfilRecibido.getEdad());
         textViewUserEmail.setText("Email: " + perfilRecibido.getEmail());
+
+        Snackbar.make(layout, "Perfil seleccionado: " + perfilRecibido.getUsername(), Snackbar.LENGTH_SHORT).show();
 
     }
 }

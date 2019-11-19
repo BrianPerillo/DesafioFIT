@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +34,7 @@ import com.example.desafiofluxit.R;
 import com.example.desafiofluxit.View.DetalleDePerfilActivity;
 import com.example.desafiofluxit.View.MapsFragment;
 import com.example.desafiofluxit.View.ResultListener;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
     private Boolean booleano = false;
     private Integer page = 1;
     private ProgressBar progressBar;
+    RelativeLayout layout;
     //private SearchView searchView;
 
 
@@ -64,6 +67,8 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
         swipeRecyclerPerfiles = findViewById(R.id.swipeRecyclerPerfiles);
 
         progressBar = findViewById(R.id.progressBar);
+
+        layout = findViewById(R.id.activityMain);
 
 
     //------------------------------
@@ -158,11 +163,11 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
 
 
                 if (result!=null && booleano==false){
-                    Toast.makeText(MainActivity.this, "Carga de Perfiles Exitosa", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(layout, "Carga de Perfiles Exitosa", Snackbar.LENGTH_SHORT).show();
                 }
 
                 else if (result!=null && booleano==true){
-                    Toast.makeText(MainActivity.this, "Actualización Exitosa", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(layout, "Actualización Exitosa", Snackbar.LENGTH_SHORT).show();
                 }
 
                 perfilAdapter.actualizarLista(perfilList);
@@ -186,8 +191,6 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
 
     @Override
     public void perfilAdapterListener(Perfil unperfil) {
-
-        Toast.makeText(this, "Perfil seleccionado: " + unperfil.getName(), Toast.LENGTH_SHORT).show();
 
         Intent intentDetallePerfil = new Intent(this, DetalleDePerfilActivity.class);
 
