@@ -31,6 +31,7 @@ import com.example.desafiofluxit.Model.Post;
 import com.example.desafiofluxit.Model.Result;
 import com.example.desafiofluxit.R;
 import com.example.desafiofluxit.View.DetalleDePerfilActivity;
+import com.example.desafiofluxit.View.MapsFragment;
 import com.example.desafiofluxit.View.ResultListener;
 
 import java.util.ArrayList;
@@ -182,6 +183,23 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
 
 
 
+  /*  @Override
+    public void perfilAdapterListener(Perfil unperfil) {
+
+        Toast.makeText(this, "Perfil seleccionado: " + unperfil.getName(), Toast.LENGTH_SHORT).show();
+
+        Intent intentDetallePerfil = new Intent(this, DetalleDePerfilActivity.class);
+
+        Bundle bundleDatosPerfil = new Bundle();
+
+        bundleDatosPerfil.putSerializable(DetalleDePerfilActivity.PERFIL, unperfil);
+
+        intentDetallePerfil.putExtras(bundleDatosPerfil);
+
+        startActivity(intentDetallePerfil);
+
+    }*/
+
     @Override
     public void perfilAdapterListener(Perfil unperfil) {
 
@@ -198,7 +216,6 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
         startActivity(intentDetallePerfil);
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

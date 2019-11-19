@@ -7,14 +7,18 @@
     tools:context=".View.DetalleDePerfilActivity"
     android:orientation="vertical">
 
+       <FrameLayout
+           android:id="@+id/mapdetalle"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"/>
 
-        <ImageView
+        <!--<ImageView
             android:id="@+id/imageViewLargeImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@mipmap/ic_launcher"
             android:layout_margin="80dp"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_gravity="center_horizontal"/>-->
 
         <TextView
             android:id="@+id/textViewUserName"
