@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-            <!-- Height del Linear Principal lo está definiendo la Image View -->
 
         <ImageView
             android:id="@+id/imageViewCeldasPerfilThumbnail"

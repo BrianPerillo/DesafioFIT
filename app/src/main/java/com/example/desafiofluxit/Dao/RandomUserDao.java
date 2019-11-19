@@ -46,6 +46,7 @@ public class RandomUserDao {
             public void onFailure(Call<Post> call, Throwable t) {
 
                 t.printStackTrace();
+
             }
         });
 

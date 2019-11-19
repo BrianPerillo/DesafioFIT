@@ -2,6 +2,7 @@ package com.example.desafiofluxit;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,6 +11,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Layout;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
     private Boolean booleano = false;
     private Integer page = 1;
     private ProgressBar progressBar;
+    private SearchView searchView;
 
 
     @Override
@@ -56,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
         swipeRecyclerPerfiles = findViewById(R.id.swipeRecyclerPerfiles);
 
         progressBar = findViewById(R.id.progressBar);
+
 
     //------------------------------
 
@@ -105,11 +109,15 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
                 booleano = true;
                 page = 1;
 
+                recyclerViewPerfiles.setVisibility(View.INVISIBLE);
+
                 getPerfiles();
 
+                recyclerViewPerfiles.setVisibility(View.VISIBLE);
 
             }
         });
+
     }
 
     //--------------Fin onCreate--------------------
@@ -141,6 +149,10 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
 
                 if (result!=null && booleano==false){
                     Toast.makeText(MainActivity.this, "Carga de Perfiles Exitosa", Toast.LENGTH_LONG).show();
+                }
+
+                else if (result==null){
+                    Toast.makeText(MainActivity.this, "Error al cargar los datos", Toast.LENGTH_LONG).show();
                 }
 
                 else if (result!=null && booleano==true){

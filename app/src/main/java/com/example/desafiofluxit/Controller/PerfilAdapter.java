@@ -26,6 +26,7 @@ public class PerfilAdapter extends RecyclerView.Adapter{
         this.listener = listener;
     }
 
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -77,6 +78,7 @@ public class PerfilAdapter extends RecyclerView.Adapter{
             textViewCeldasPerfilNombre = itemView.findViewById(R.id.textViewCeldasPerfilNombre);
             this.myView = itemView;
 
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -90,7 +92,6 @@ public class PerfilAdapter extends RecyclerView.Adapter{
         }
 
         public void bind (Perfil unperfil){
-
 
             textViewCeldasPerfilNombre.setText(unperfil.getUsername());
 
