@@ -21,6 +21,8 @@ public class RandomUserDao {
     private Retrofit retrofit;
     private String baseUrl;
     private RandomUserService randomUserService;
+    private String error = "";
+    private Post perfil;
 
     public RandomUserDao(){
         baseUrl = "https://randomuser.me/";
@@ -31,21 +33,28 @@ public class RandomUserDao {
         randomUserService = retrofit.create(RandomUserService.class);
     }
 
-    public void getPerfiles(Integer pageSize, String seed, Integer page, final ResultListener<Post> escuchadorDelControlador){
+    public void getPerfiles(Integer pageSize, String seed, Integer page, final ResultListener<Post, String> escuchadorDelControlador){
 
         randomUserService.getPerfiles(pageSize, seed, page).enqueue(new Callback<Post>() {
             @Override
             public void onResponse(Call<Post> call, Response<Post> response) {
+               if(response.isSuccessful()){
+                perfil = response.body();
+                escuchadorDelControlador.onFinish(perfil, error);
 
-                Post perfil = response.body();
-                escuchadorDelControlador.onFinish(perfil);
+               }
 
+               else{
+                   error = "hubo un error";
+                   escuchadorDelControlador.onFinish(perfil, error);
+               }
             }
 
             @Override
             public void onFailure(Call<Post> call, Throwable t) {
-
-                t.printStackTrace();
+                error = "hubo un error";
+                escuchadorDelControlador.onFinish(perfil, error);
+                //t.printStackTrace();
 
             }
         });

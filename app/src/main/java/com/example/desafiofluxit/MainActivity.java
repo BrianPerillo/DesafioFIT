@@ -138,9 +138,11 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
             progressBar.setVisibility(View.VISIBLE);
         }
 
-        randomUserController.getPerfiles(page, new ResultListener<Post>(){
+        randomUserController.getPerfiles(page, new ResultListener<Post, String>(){
             @Override
-            public void onFinish(Post result) {
+            public void onFinish(Post result, String error) {
+
+                if (result!=null){
 
                 List<Result> resultList = result.getResults();
 
@@ -150,6 +152,7 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
                             data.getName().getFirst(), data.getName().getLast(), data.getEmail(), data.getRegistered().getAge()));
 
                 }
+
 
                 if (result!=null && booleano==false){
                     Toast.makeText(MainActivity.this, "Carga de Perfiles Exitosa", Toast.LENGTH_SHORT).show();
@@ -161,8 +164,16 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
 
                 perfilAdapter.actualizarLista(perfilList);
 
-                progressBar.setVisibility(View.GONE);
+
                 swipeRecyclerPerfiles.setRefreshing(false);
+                }
+
+                else if (error.length()!=0){
+                    Toast.makeText(MainActivity.this, error, Toast.LENGTH_SHORT).show();
+                }
+
+                progressBar.setVisibility(View.GONE);
+
             }
 
         });

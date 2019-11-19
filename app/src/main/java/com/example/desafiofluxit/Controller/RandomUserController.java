@@ -19,13 +19,14 @@ public class RandomUserController {
 
 
     public void getPerfiles(Integer page, final ResultListener escuchadorDeLaView){
-        randomUserDao.getPerfiles(pageSize, seed, page, new ResultListener<Post>() {
+        randomUserDao.getPerfiles(pageSize, seed, page, new ResultListener<Post, String>() {
             @Override
-            public void onFinish(Post result) {
-                escuchadorDeLaView.onFinish(result);
+            public void onFinish(Post result, String error) {
+                escuchadorDeLaView.onFinish(result, error);
 
+                if (result!=null){
                 seed = result.getInfo().getSeed();
-
+                }
 
             }
         });
