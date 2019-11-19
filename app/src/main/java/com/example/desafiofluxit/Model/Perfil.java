@@ -13,9 +13,11 @@ public class Perfil implements Serializable {
     private String lastName;
     private String email;
     private Integer edad;
+    private String latitude;
+    private String longitude;
 
 
-    public Perfil(String username, String thumbnail, String largePic, String name, String lastName, String email, Integer edad) {
+    public Perfil(String username, String thumbnail, String largePic, String name, String lastName, String email, Integer edad, String latitude, String longitude) {
         this.username = username;
         this.thumbnail = thumbnail;
         this.largePic = largePic;
@@ -23,6 +25,8 @@ public class Perfil implements Serializable {
         this.lastName = lastName;
         this.email = email;
         this.edad = edad;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public String getUsername() {
@@ -79,5 +83,21 @@ public class Perfil implements Serializable {
 
     public void setEdad(Integer edad) {
         this.edad = edad;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 }

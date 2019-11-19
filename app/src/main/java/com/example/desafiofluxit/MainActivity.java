@@ -150,9 +150,11 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
                 for (Result data : resultList) {
 
                     perfilList.add(new Perfil(data.getLogin().getUsername(), data.getPicture().getThumbnail(), data.getPicture().getLarge(),
-                            data.getName().getFirst(), data.getName().getLast(), data.getEmail(), data.getRegistered().getAge()));
-
+                            data.getName().getFirst(), data.getName().getLast(), data.getEmail(), data.getRegistered().getAge(),
+                            data.getLocation().getCoordinates().getLatitude(), data.getLocation().getCoordinates().getLongitude()));
                 }
+
+
 
 
                 if (result!=null && booleano==false){
@@ -181,24 +183,6 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
 
     }
 
-
-
-  /*  @Override
-    public void perfilAdapterListener(Perfil unperfil) {
-
-        Toast.makeText(this, "Perfil seleccionado: " + unperfil.getName(), Toast.LENGTH_SHORT).show();
-
-        Intent intentDetallePerfil = new Intent(this, DetalleDePerfilActivity.class);
-
-        Bundle bundleDatosPerfil = new Bundle();
-
-        bundleDatosPerfil.putSerializable(DetalleDePerfilActivity.PERFIL, unperfil);
-
-        intentDetallePerfil.putExtras(bundleDatosPerfil);
-
-        startActivity(intentDetallePerfil);
-
-    }*/
 
     @Override
     public void perfilAdapterListener(Perfil unperfil) {

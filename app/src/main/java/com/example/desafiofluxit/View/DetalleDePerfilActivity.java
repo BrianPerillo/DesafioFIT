@@ -26,7 +26,9 @@ public class DetalleDePerfilActivity extends AppCompatActivity {
     private TextView textViewLastName;
     private TextView textViewLastEdad;
     private TextView textViewUserEmail;
-
+    private MapsFragment mapsFragment;
+    private Double latitudeD;
+    private Double longitudeD;
 
     public static final String PERFIL = "perfil";
 
@@ -34,6 +36,8 @@ public class DetalleDePerfilActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_de_perfil);
+
+        mapsFragment = new MapsFragment();
 
         //imageViewLargeImage = findViewById(R.id.imageViewLargeImage);
 
@@ -44,13 +48,6 @@ public class DetalleDePerfilActivity extends AppCompatActivity {
         textViewLastEdad = findViewById(R.id.textViewLastEdad);;
 
         textViewUserEmail = findViewById(R.id.textViewUserEmail);
-
-        MapsFragment mapsFragment = new MapsFragment();
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.mapdetalle, mapsFragment).commit();
-
 
         Intent intentRecibido = getIntent();
 
@@ -63,6 +60,27 @@ public class DetalleDePerfilActivity extends AppCompatActivity {
                 .load(perfilRecibido.getLargePic())
                 .centerCrop()
                 .into(imageViewLargeImage);*/
+
+        //-----Bundle coordenadas para MapsFragment
+
+        String latitudeS = perfilRecibido.getLatitude();
+        String longitudeS = perfilRecibido.getLongitude();
+
+        latitudeD = Double.valueOf(latitudeS);
+        longitudeD = Double.valueOf(longitudeS);
+
+        Bundle bundleConCoordenadas = new Bundle();
+
+        bundleConCoordenadas.putDouble("latitude", latitudeD);
+        bundleConCoordenadas.putDouble("longitude", longitudeD);
+
+        mapsFragment.setArguments(bundleConCoordenadas);
+
+        //-----Bundle coordenadas para MapsFragment
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.mapdetalle, mapsFragment).commit();
 
         textViewUserName.setText("Nombre: " + perfilRecibido.getName());
         textViewLastName.setText("Apellido: " + perfilRecibido.getLastName());

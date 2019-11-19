@@ -26,6 +26,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     SupportMapFragment mapFragment;
+    private Double longitudeD;
+    private Double latitudeD;
+
 
     public MapsFragment() {
         // Required empty public constructor
@@ -48,16 +51,21 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
      }
         mapFragment.getMapAsync(this);
 
+        Bundle bundleConCoordenadas = getArguments();
+        longitudeD = bundleConCoordenadas.getDouble("latitude");
+        latitudeD = bundleConCoordenadas.getDouble("longitude");
+
         return view;
     }
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        // Add a marker in Location
+        LatLng location = new LatLng(latitudeD, longitudeD);
+        mMap.addMarker(new MarkerOptions().position(location).title("Location"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
     }
 }
