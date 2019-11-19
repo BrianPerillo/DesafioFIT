@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <TextView
+   <!-- <TextView
         android:id="@+id/datoPrueba"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,12 +24,12 @@
         android:textColor="#ECECEC"
         android:padding="10dp"
         android:layout_marginBottom="10dp"
-        />
+        />-->
 
-    <androidx.appcompat.widget.SearchView
+    <!--<androidx.appcompat.widget.SearchView
         android:id="@+id/searchViewPerfiles"
         android:layout_width="match_parent"
-        android:layout_height="40dp"/>
+        android:layout_height="40dp"/>-->
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRecyclerPerfiles"

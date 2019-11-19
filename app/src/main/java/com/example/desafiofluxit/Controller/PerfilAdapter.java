@@ -14,6 +14,7 @@ import com.example.desafiofluxit.MainActivity;
 import com.example.desafiofluxit.Model.Perfil;
 import com.example.desafiofluxit.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PerfilAdapter extends RecyclerView.Adapter{
@@ -102,6 +103,14 @@ public class PerfilAdapter extends RecyclerView.Adapter{
 
         }
 
+
+    }
+
+    public void setFilter(List<Perfil> perfilList){
+
+        this.perfilList=new ArrayList<>();
+        this.perfilList.addAll(perfilList);
+        notifyDataSetChanged();
 
     }
 

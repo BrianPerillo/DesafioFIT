@@ -3,15 +3,19 @@ package com.example.desafiofluxit;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
+import android.content.PeriodicSync;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Layout;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -32,11 +36,11 @@ import com.example.desafiofluxit.View.ResultListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements PerfilAdapter.PerfilAdapterListener {
+public class MainActivity extends AppCompatActivity implements PerfilAdapter.PerfilAdapterListener, SearchView.OnQueryTextListener {
 
     private RecyclerView recyclerViewPerfiles;
     private PerfilAdapter perfilAdapter;
-    private TextView datoPrueba;
+    //private TextView datoPrueba;
     private LinearLayoutManager linearLayoutManagerPerfiles;
     private RandomUserController randomUserController;
     private List<Perfil> perfilList;
@@ -44,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
     private Boolean booleano = false;
     private Integer page = 1;
     private ProgressBar progressBar;
-    private SearchView searchView;
+    //private SearchView searchView;
 
 
     @Override
@@ -52,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        datoPrueba = findViewById(R.id.datoPrueba);
+        //datoPrueba = findViewById(R.id.datoPrueba);
 
         recyclerViewPerfiles = findViewById(R.id.recyclerViewPerfiles);
 
@@ -148,15 +152,11 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
                 }
 
                 if (result!=null && booleano==false){
-                    Toast.makeText(MainActivity.this, "Carga de Perfiles Exitosa", Toast.LENGTH_LONG).show();
-                }
-
-                else if (result==null){
-                    Toast.makeText(MainActivity.this, "Error al cargar los datos", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "Carga de Perfiles Exitosa", Toast.LENGTH_SHORT).show();
                 }
 
                 else if (result!=null && booleano==true){
-                    Toast.makeText(MainActivity.this, "Actualización Exitosa", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "Actualización Exitosa", Toast.LENGTH_SHORT).show();
                 }
 
                 perfilAdapter.actualizarLista(perfilList);
@@ -188,4 +188,74 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
 
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_buscador, menu);
+        MenuItem item = menu.findItem(R.id.buscador);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+
+        searchView.setOnQueryTextListener(this);
+
+        MenuItemCompat.setOnActionExpandListener(item, new MenuItemCompat.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                perfilAdapter.setFilter(perfilList);
+                return true;
+            }
+        });
+
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+
+        try{
+
+            List<Perfil> listaFiltrada = filter(perfilList, newText);
+            perfilAdapter.setFilter(listaFiltrada);
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    private List<Perfil> filter(List<Perfil> perfiles, String texto){
+
+        List<Perfil>listaFiltrada=new ArrayList<>();
+
+        try{
+
+            texto = texto.toLowerCase();
+
+            for (Perfil perfil : perfiles){
+                String nota2 = perfil.getUsername().toLowerCase();
+
+                if(nota2.contains(texto)){
+                    listaFiltrada.add(perfil);
+                }
+
+            }
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return listaFiltrada;
+
+    }
 }
