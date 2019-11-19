@@ -12,7 +12,7 @@
            android:id="@+id/mapdetalle"
            android:layout_width="match_parent"
            android:layout_height="0dp"
-           android:layout_weight="1"/>
+           android:layout_weight="4"/>
 
         <!--<ImageView
             android:id="@+id/imageViewLargeImage"
@@ -29,45 +29,116 @@
         android:orientation="vertical"
         android:gravity="center">
 
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="1dp"
+            app:cardElevation="1dp"
+            android:layout_marginBottom="1dp"
+            android:layout_gravity="center"
+            >
+
         <TextView
             android:id="@+id/textViewUserName"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginBottom="20dp"
+            android:layout_height="match_parent"
             android:text="NAME"
             android:textSize="15dp"
             android:gravity="center"
             />
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="1dp"
+            app:cardElevation="1dp"
+            android:layout_marginBottom="1dp"
+            android:layout_gravity="center"
+            >
 
         <TextView
             android:id="@+id/textViewLastName"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginBottom="20dp"
+            android:layout_height="match_parent"
             android:text="NAME"
             android:textSize="15dp"
             android:gravity="center"
             />
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="1dp"
+            app:cardElevation="1dp"
+            android:layout_marginBottom="1dp"
+            android:layout_gravity="center"
+            >
 
         <TextView
             android:id="@+id/textViewLastEdad"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginBottom="20dp"
+            android:layout_height="match_parent"
             android:text="NAME"
             android:textSize="15dp"
             android:gravity="center"
             />
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="1dp"
+            app:cardElevation="1dp"
+            android:layout_marginBottom="1dp"
+            android:layout_gravity="center"
+            >
 
         <TextView
             android:id="@+id/textViewUserEmail"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="match_parent"
             android:text="NAME"
             android:textSize="15dp"
             android:gravity="center"
             />
 
+        </com.google.android.material.card.MaterialCardView>
+
     </LinearLayout>
+
+
 
 </LinearLayout>

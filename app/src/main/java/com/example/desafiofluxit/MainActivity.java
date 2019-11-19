@@ -204,6 +204,7 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
 
     }
 
+    //---- Opciones Menu ----
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -228,6 +229,8 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
 
         return true;
     }
+
+    //---- Buscador ----
 
     @Override
     public boolean onQueryTextSubmit(String query) {
