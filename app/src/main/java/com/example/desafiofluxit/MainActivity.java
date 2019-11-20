@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
 
     private RecyclerView recyclerViewPerfiles;
     private PerfilAdapter perfilAdapter;
-    //private TextView datoPrueba;
     private LinearLayoutManager linearLayoutManagerPerfiles;
     private RandomUserController randomUserController;
     private List<Perfil> perfilList;
@@ -52,7 +51,6 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
     private Integer page = 1;
     private ProgressBar progressBar;
     RelativeLayout layout;
-    //private SearchView searchView;
 
 
     @Override
@@ -60,7 +58,6 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //datoPrueba = findViewById(R.id.datoPrueba);
 
         recyclerViewPerfiles = findViewById(R.id.recyclerViewPerfiles);
 
@@ -101,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
                 Integer items = linearLayoutManagerPerfiles.getItemCount();
                 Integer posicionActual = linearLayoutManagerPerfiles.findLastVisibleItemPosition();
 
-                if (posicionActual.equals(items - 4)){
+                if (posicionActual.equals(items-4)){
 
                     page++;
 
@@ -160,8 +157,6 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
                 }
 
 
-
-
                 if (result!=null && booleano==false){
                     Snackbar.make(layout, "Carga de Perfiles Exitosa", Snackbar.LENGTH_SHORT).show();
                 }
@@ -204,7 +199,7 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
 
     }
 
-    //---- Opciones Menu ----
+    //---- Menu ----
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -261,9 +256,9 @@ public class MainActivity extends AppCompatActivity implements PerfilAdapter.Per
             texto = texto.toLowerCase();
 
             for (Perfil perfil : perfiles){
-                String nota2 = perfil.getUsername().toLowerCase();
+                String username = perfil.getUsername().toLowerCase();
 
-                if(nota2.contains(texto)){
+                if(username.contains(texto)){
                     listaFiltrada.add(perfil);
                 }
 

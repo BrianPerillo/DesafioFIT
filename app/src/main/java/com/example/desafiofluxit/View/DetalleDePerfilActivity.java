@@ -43,8 +43,6 @@ public class DetalleDePerfilActivity extends AppCompatActivity {
 
         mapsFragment = new MapsFragment();
 
-        //imageViewLargeImage = findViewById(R.id.imageViewLargeImage);
-
         textViewUserName = findViewById(R.id.textViewUserName);;
 
         textViewLastName = findViewById(R.id.textViewLastName);;
@@ -64,12 +62,7 @@ public class DetalleDePerfilActivity extends AppCompatActivity {
         Perfil perfilRecibido = (Perfil) bundleRecibido.getSerializable(PERFIL);
 
 
-        /*Glide.with(this)
-                .load(perfilRecibido.getLargePic())
-                .centerCrop()
-                .into(imageViewLargeImage);*/
-
-        //-----Bundle coordenadas para MapsFragment
+        //-----Bundle con coordenadas para MapsFragment
 
         String latitudeS = perfilRecibido.getLatitude();
         String longitudeS = perfilRecibido.getLongitude();
@@ -84,7 +77,7 @@ public class DetalleDePerfilActivity extends AppCompatActivity {
 
         mapsFragment.setArguments(bundleConCoordenadas);
 
-        //-----Bundle coordenadas para MapsFragment
+        //----- Fin Bundle con coordenadas para MapsFragment
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
